@@ -1,32 +1,29 @@
 import React from 'react';
 import Bar from './Bar';
 
-const CreateColumnChart = (props) => {
-  console.log(props);
-  const w = props.obj.x_axis_label;
-  const h = props.obj.y_axis_label;
+const CreateColumnChart = ({ obj }) => {
+  const { width, height, data, defaultColor, categories, x_axis_label, y_axis_label } = obj;
   const barWidth = 60;
+  let col = defaultColor;
 
-  const styleBoundary = {
-    "height": h + "px",
-    "width": w + "px"
-  }
-
-  let col = props.obj.color;
-
-  let barsList = (props.obj.data).map((barData, index) => {
-    if (barData.color === undefined) {
-      col = props.obj.color;
-    }
-    else {
-      col = barData.color;
-    }
-    return <Bar margin={h - barData.value} content={props.obj.categories[index]} key={index} height={barData.value} width={barWidth} color={col} />
+  const barsList = (data).map(({ color, value }, index) => {
+    col = (color || defaultColor);
+    return <Bar margin={height - value} content={categories[index]} key={index} height={value} width={barWidth} color={col} />
   })
 
   return (
-    <div id="Boundary" className="flex-container" style={styleBoundary}>
-      {barsList}
+    <div>
+      <div id="chart">
+        <div id="side-label" style={{ "height": `${height}px` }}>
+          {y_axis_label}
+        </div>
+        <div id="boundary" className="flex-container" style={{ "height": `${height}px`, "width": `${width}px` }}>
+          {barsList}
+        </div>
+      </div>
+      <div id="bottom-label">
+        {x_axis_label}
+      </div>
     </div>
   )
 }

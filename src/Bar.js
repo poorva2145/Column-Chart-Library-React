@@ -1,18 +1,18 @@
 import React from 'react';
 
-const Bar = (props) => {
+const Bar = ({ height, width, margin, color, content }) => {
   const styleBar = {
-    "height": props.height + "px",
-    "width": props.width + "px",
-    "marginTop": props.margin + "px",
-    "background": props.color
+    "height": height + "px",
+    "width": width + "px",
+    "marginTop": margin + "px",
+    "background": color
   }
 
   return (
-    <div className="Bars" style={styleBar}>
-      {props.content}
+    <div className="bars" style={styleBar}>
+      {content}
       <br></br>
-      {props.height}
+      {height}
     </div>
   )
 }
