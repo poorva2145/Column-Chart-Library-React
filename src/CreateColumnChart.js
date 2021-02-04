@@ -12,8 +12,16 @@ const CreateColumnChart = (props) => {
     "width": w + "px"
   }
 
+  let col = props.obj.color;
+
   let barsList = (props.obj.data).map((barData, index) => {
-    return <Bar margin={h - barData.value} content={props.obj.categories[index]} key={index} height={barData.value} width={barWidth} color={barData.color} />
+    if (barData.color === undefined) {
+      col = props.obj.color;
+    }
+    else {
+      col = barData.color;
+    }
+    return <Bar margin={h - barData.value} content={props.obj.categories[index]} key={index} height={barData.value} width={barWidth} color={col} />
   })
 
   return (
